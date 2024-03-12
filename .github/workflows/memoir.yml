@@ -28,7 +28,11 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.GH_PAT }}
         run: |
+          # knit
           lapply(list.files(pattern="*.Rmd"), function(file) rmarkdown::render(file, "all"))
+          # post-treatment
+          source("post-treatment.R")
+          # Move outputs to /docs
           memoiR::build_githubpages()
         shell: Rscript {0}
       - name: Upload artifact
