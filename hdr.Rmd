@@ -1,0 +1,26 @@
+---
+title: "Citations personnelles en gras"
+output:
+  pdf_document:
+    keep_tex: true
+  html_document:
+    df_print: paged
+    pandoc_args: "--lua-filter=fr-nbsp.lua"
+bibliography: references.bib
+---
+
+Ce test utilise deux citations **[@Abe2001]**+[@Acs1991; @Adelman1969] séparée par un `+`.
+Attention: le mode visuel de R Studio modifie le code: c'est un problème, il ne faut surtout pas passer en mode visuel!
+
+Le script `post-treatment.R` permet de remplacer les parenthèses en trop par un point-virgule.
+Il faut le compléter pour les autres cas :
+
+- citation grasse après une citation normale;
+- d'autres cas auxquels je n'aurais pas pensé.
+Dans tous les cas, ouvrir le fichier HTML et le fichier TeX pour copier les patrons de chaînes.
+
+Pour la version PDF, il faut conserver le fichier TeX (`keep_tex: true`), exécuter le script de post-traitement, puis ouvrir le fichier TeX final et enfin le compiler.
+
+Remarque : le filtre LUA formate correctement la ponctuation en français dans le fichier HTML.
+
+`r if (!knitr:::is_latex_output()) '# References {-}'`
