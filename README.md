@@ -4,8 +4,5 @@ Méthode pour écrire certaines citations en gras dans un document R Markown, ty
 
 Doocuments produits:
 
-- [HTML](hdr.html)
-- [PDF](hdr.pdf)
-
-
-
+- [HTML](https://ericmarcon.github.io/Citations_grasses/hdr_final.html)
+- [PDF](https://ericmarcon.github.io/Citations_grasses/hdr_final.pdf)
