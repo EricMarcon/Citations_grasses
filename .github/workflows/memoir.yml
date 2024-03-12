@@ -33,7 +33,9 @@ jobs:
           # post-treatment
           source("post-treatment.R")
           # Move outputs to /docs
-          memoiR::build_githubpages()
+          files_to_move <- list.files(pattern = "*_final.*")
+          file.rename(from = files_to_move, to = paste("docs/", files_to_move, sep = ""))
+          file.copy(from = "README.md", to = "docs/README.md", overwrite = TRUE)
         shell: Rscript {0}
       - name: GH Pages Theme
         run: |
