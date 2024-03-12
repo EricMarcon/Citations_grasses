@@ -30,3 +30,6 @@ readLines("hdr.tex") |>
     replacement = '; \\textbf{'
   ) |>
   writeLines(con = "hdr_final.tex")
+# Compilation
+tinytex::xelatex(file = "hdr_final.tex")
+
