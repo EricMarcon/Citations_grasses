@@ -32,7 +32,8 @@ jobs:
           lapply(list.files(pattern="*.Rmd"), function(file) rmarkdown::render(file, "all"))
           # post-treatment
           source("post-treatment.R")
-          # Move outputs to /docs
+          # Move outputs to docs/
+          if (!dir.exists("docs")) dir.create("docs")
           files_to_move <- list.files(pattern = "*_final.*")
           file.rename(from = files_to_move, to = paste("docs/", files_to_move, sep = ""))
           file.copy(from = "README.md", to = "docs/README.md", overwrite = TRUE)
