@@ -1,11 +1,12 @@
 ---
 title: "Citations personnelles en gras"
 output:
+  bookdown::pdf_book:
+    keep_tex: true
+    toc: false
   bookdown::html_document2:
     pandoc_args: "--lua-filter=fr-nbsp.lua"
     keep_md: true
-  bookdown::pdf_book:
-    keep_tex: true
 bibliography: references.bib
 ---
 
@@ -35,4 +36,4 @@ Pour la version PDF, il faut conserver le fichier TeX (`keep_tex: true`), exécu
 
 Remarque : le filtre LUA formate correctement la ponctuation en français dans le fichier HTML.
 
-`r if (!knitr:::is_latex_output()) '# References {-}'`
+# References
