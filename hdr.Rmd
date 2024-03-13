@@ -1,10 +1,10 @@
 ---
 title: "Citations personnelles en gras"
 output:
-  html_document:
-    df_print: paged
+  bookdown::html_document2:
     pandoc_args: "--lua-filter=fr-nbsp.lua"
-  pdf_document:
+    keep_md: true
+  bookdown::pdf_book:
     keep_tex: true
 bibliography: references.bib
 ---
@@ -16,9 +16,20 @@ Autres cas:
 
 - une citation grasse à la fin: [@Abe2001]+**[@Acs1991]**.
 - une citation grasse au milieu : [@Abe2001]+**[@Acs1991]**+[@Adelman1969].
+- une citation en ligne, **@Abe2001**.
 
 Le script `post-treatment.R` permet de remplacer les parenthèses en trop par un point-virgule.
 Il laisse les parenthèses de début ou de fin en gras, ce qui est imparfait, mais il n'y a pas de moyen simple de reconnaître les parenthèses de fin de citation.
+
+(ref:pressure) Légende de la figure avec une référence [@Abe2001].
+
+```{r}
+#| label: pressure
+#| echo: false
+#| fig.cap: (ref:pressure)
+plot(pressure)
+```
+
 
 Pour la version PDF, il faut conserver le fichier TeX (`keep_tex: true`), exécuter le script de post-traitement, puis ouvrir le fichier TeX final et enfin le compiler.
 
