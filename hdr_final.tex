@@ -37,6 +37,16 @@
 \makeatother
 \usepackage{xcolor}
 \usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -53,7 +63,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\setcounter{secnumdepth}{5}
 % definitions for citeproc citations
 \NewDocumentCommand\citeproctext{}{}
 \NewDocumentCommand\citeproc{mm}{%
@@ -105,53 +115,49 @@
 \begin{document}
 \maketitle
 
-Ce test utilise deux citations \textbf{(Abe and Rajagopal 2001}; Acs,
-Audretsch, and Feldman 1991; Adelman 1969) séparée par un \texttt{+}.
-Attention: le mode visuel de R Studio modifie le code: c'est un
-problème, il ne faut surtout pas passer en mode visuel!
+Ce test utilise deux citations \textbf{(Abe and Rajagopal 2001}; Acs, Audretsch, and Feldman 1991; Adelman 1969) séparée par un \texttt{+}.
+Attention: le mode visuel de R Studio modifie le code: c'est un problème, il ne faut surtout pas passer en mode visuel!
 
 Autres cas:
 
 \begin{itemize}
 \tightlist
 \item
-  une citation grasse à la fin: (Abe and Rajagopal 2001; \textbf{Acs,
-  Audretsch, and Feldman 1991)}.
+  une citation grasse à la fin: (Abe and Rajagopal 2001; \textbf{Acs, Audretsch, and Feldman 1991)}.
 \item
-  une citation grasse au milieu : (Abe and Rajagopal 2001; \textbf{Acs,
-  Audretsch, and Feldman 1991}; Adelman 1969).
+  une citation grasse au milieu : (Abe and Rajagopal 2001; \textbf{Acs, Audretsch, and Feldman 1991}; Adelman 1969).
+\item
+  une citation en ligne, \textbf{Abe and Rajagopal (2001)}.
 \end{itemize}
 
-Le script \texttt{post-treatment.R} permet de remplacer les parenthèses
-en trop par un point-virgule. Il laisse les parenthèses de début ou de
-fin en gras, ce qui est imparfait, mais il n'y a pas de moyen simple de
-reconnaître les parenthèses de fin de citation.
+Le script \texttt{post-treatment.R} permet de remplacer les parenthèses en trop par un point-virgule.
+Il laisse les parenthèses de début ou de fin en gras, ce qui est imparfait, mais il n'y a pas de moyen simple de reconnaître les parenthèses de fin de citation.
 
-Pour la version PDF, il faut conserver le fichier TeX
-(\texttt{keep\_tex:\ true}), exécuter le script de post-traitement, puis
-ouvrir le fichier TeX final et enfin le compiler.
 
-Remarque : le filtre LUA formate correctement la ponctuation en français
-dans le fichier HTML.
+
+\begin{figure}
+\centering
+\includegraphics{hdr_files/figure-latex/pressure-1.pdf}
+\caption{\label{fig:pressure}Légende de la figure avec une référence (Abe and Rajagopal 2001).}
+\end{figure}
+
+Pour la version PDF, il faut conserver le fichier TeX (\texttt{keep\_tex:\ true}), exécuter le script de post-traitement, puis ouvrir le fichier TeX final et enfin le compiler.
+
+Remarque : le filtre LUA formate correctement la ponctuation en français dans le fichier HTML.
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
 \bibitem[\citeproctext]{ref-Abe2001}
-Abe, Sumiyoshi, and A. K. Rajagopal. 2001. {``Nonadditive Conditional
-Entropy and Its Significance for Local Realism.''} \emph{Physica
-A-Statistical Mechanics and Its Applications} 289 (1-2): 157164.
-\url{https://doi.org/10.1016/S0378-4371(00)00476-3}.
+Abe, Sumiyoshi, and A. K. Rajagopal. 2001. {``Nonadditive Conditional Entropy and Its Significance for Local Realism.''} \emph{Physica A-Statistical Mechanics and Its Applications} 289 (1-2): 157164. \url{https://doi.org/10.1016/S0378-4371(00)00476-3}.
 
 \bibitem[\citeproctext]{ref-Acs1991}
-Acs, Zoltan J., David B. Audretsch, and Maryann P. Feldman. 1991.
-{``Real Effects of Academic Research: Comment.''} \emph{The American
-Economic Review} 82 (1): 363367.
-\url{http://www.jstor.org/stable/2117624}.
+Acs, Zoltan J., David B. Audretsch, and Maryann P. Feldman. 1991. {``Real Effects of Academic Research: Comment.''} \emph{The American Economic Review} 82 (1): 363367. \url{http://www.jstor.org/stable/2117624}.
 
 \bibitem[\citeproctext]{ref-Adelman1969}
-Adelman, M. A. 1969. {``Comment on the {"}h{"} Concentration Measure as
-a Numbers-Equivalent.''} \emph{The Review of Economics and Statistics}
-51 (1): 99101. \url{https://doi.org/10.2307/1926955}.
+Adelman, M. A. 1969. {``Comment on the {"}h{"} Concentration Measure as a Numbers-Equivalent.''} \emph{The Review of Economics and Statistics} 51 (1): 99101. \url{https://doi.org/10.2307/1926955}.
 
 \end{CSLReferences}
 
